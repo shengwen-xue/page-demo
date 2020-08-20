@@ -32,21 +32,28 @@
 		}
 
 		function conf() { // 点击确认
-			var check = $("input:checkbox:checked")
-			check.each(function () {
-				var row = $(this).parent("td").parent("tr");
-				var id = $("[name='id']").val();
-				var userName = row.find("[name='userName']").html();
-				var salesName = row.find("[name='salesName']").html();
-				var dateStr = row.find("[name='dateStr']").html();
-				console.info(row)
-				alert(id + "-" + userName + "-" + salesName + "-" + dateStr);
+			var arrayList = new Array();
+			$("input:checkbox[name='id']:checked").each(function () {
+				arrayList.push($(this).val());
 			});
-
+			if (arrayList.length > 0) {
+				var check = $("input:checkbox:checked")
+				check.each(function () {
+					var row = $(this).parent("td").parent("tr");
+					var id = $("[name='id']").val();
+					var userName = row.find("[name='userName']").html();
+					var salesName = row.find("[name='salesName']").html();
+					var dateStr = row.find("[name='dateStr']").html();
+					console.info(row)
+					alert(id + "-" + userName + "-" + salesName + "-" + dateStr);
+				});
+			} else {
+				alert("请至少选择一条数据");
+			}
 		}
 
-		function canc() {
-			alert("333");
+		function canc() { // 关闭窗口
+			window.close();
 		}
 	</script>
 
