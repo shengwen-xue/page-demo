@@ -44,13 +44,26 @@
 					var userName = row.find("[name='userName']").html();
 					var salesName = row.find("[name='salesName']").html();
 					var dateStr = row.find("[name='dateStr']").html();
-					console.info(row)
+					//console.info(row)
 					alert(id + "-" + userName + "-" + salesName + "-" + dateStr);
+					// if(window.parent != this.window){  //判断是否存在父窗口
+					// 	alert("存在父窗口");
+					
+					// }else{
+					// 	alert("不存在父窗口");
+					
+					// }
+					//$("#userName", window.parent.document).attr("value", userName);
+					// console.info($(window.parent.document).find(".userName").text("123"));
+					//console.info($("#theme",window.parent.document).userName);
+					console.info($("#theme",window.parent.document).val());
 				});
 			} else {
 				alert("请至少选择一条数据");
 			}
 		}
+
+		
 
 		function canc() { // 关闭窗口
 			window.close();
