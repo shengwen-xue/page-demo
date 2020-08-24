@@ -48,26 +48,25 @@
 					alert(id + "-" + userName + "-" + salesName + "-" + dateStr);
 					// if(window.parent != this.window){  //判断是否存在父窗口
 					// 	alert("存在父窗口");
-					
+
 					// }else{
 					// 	alert("不存在父窗口");
-					
+
 					// }
 					//$("#userName", window.parent.document).attr("value", userName);
 					// console.info($(window.parent.document).find(".userName").text("123"));
 					//console.info($("#theme",window.parent.document).userName);
-					var a = $("#theme",window.parent.document).val
-					alert(a)
-					console.info($("#theme",window.parent.document).attr("value", "ssss"));
-					window.parent.parent.location.reload();
-					//window.opener.location.href=window.opener.location.href;
+					var a = $("#theme", window.parent.document).val;
+					console.info(a);
+					console.info(window.parent.document.getElementById("theme"));
+					console.info($("#theme", window.parent.document).attr("value", "ssss"));
 				});
 			} else {
 				alert("请至少选择一条数据");
 			}
 		}
 
-		
+
 
 		function canc() { // 关闭窗口
 			window.close();
