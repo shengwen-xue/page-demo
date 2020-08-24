@@ -59,6 +59,8 @@
 					var a = $("#theme",window.parent.document).val
 					console.info($("#theme",window.parent.document).val);
 					alert(a)
+					parent.location.reload();
+					window.opener.location.href=window.opener.location.href;
 				});
 			} else {
 				alert("请至少选择一条数据");
