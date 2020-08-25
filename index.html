@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>客户信息</title>
+	<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<style>
+		table {
+			/* 合并单元格框线 */
+			border-collapse: collapse;
+		}
+
+		td {
+			border: solid 1px #ccc;
+			width: 100px;
+			height: 28px;
+			text-align: center;
+			vertical-align: middle;
+		}
+	</style>
+
+	<script>
+		function search() {
+			// $("#list").html("")
+			// var key = $("[name='key']").val();
+			var key = "";
+			var keys = document.getElementsByName("key")
+			for (var i = 0; i < keys.length; i++) {
+				key = keys[i].value;
+			}
+			if (key == null || key == "") {
+				alert("请输入客户名称");
+			} else {
+				// 步骤一:创建异步对象
+				var ajax = new XMLHttpRequest();
+				// 步骤二:设置请求的url参数,参数一是请求的类型,参数二是请求的url,可以带参数,动态的传递参数starName到服务端
+				ajax.open('get', 'http://localhost:8082/cloudwalk-wechat/wechat/test?key=' + key);
+				// 步骤三:发送请求
+				ajax.send();
+				// 步骤四:注册事件 onreadystatechange 状态改变就会调用
+				ajax.onreadystatechange = function () {
+					if (ajax.readyState == 4 && ajax.status == 200) {
+
+						// 步骤五 如果能够进到这个判断 说明 数据 完美的回来了,并且请求的页面是存在的
+						var json = JSON.parse(ajax.responseText)
+						// console.info(json[0].id + "-" + json[0].userName + "-" + json[0].salesName + "-" + json[0].dateStr)
+						// var tr = document.createElement("tr")
+						var checkboxTd = document.createElement("td")
+						var checkoutInput = document.createElement("input")
+						var userNameTd = document.createElement("td")
+						var salesNameTd = document.createElement("td")
+						var dateStrTd = document.createElement("td")
+						checkoutInput.setAttribute("type", "checkbox")
+						checkoutInput.setAttribute("name", "id")
+						checkoutInput.setAttribute("value", json[0].id)
+						checkboxTd.append(checkoutInput)
+						userNameTd.setAttribute("name", "userName")
+						salesNameTd.setAttribute("name", "salesName")
+						dateStrTd.setAttribute("name", "dateStr")
+						var userName = document.createTextNode(json[0].userName)
+						var salesName = document.createTextNode(json[0].salesName)
+						var dateStr = document.createTextNode(json[0].dateStr)
+						userNameTd.appendChild(userName);
+						salesNameTd.appendChild(salesName);
+						dateStrTd.appendChild(dateStr)
+						// tr.appendChild(checkoutInput)
+						// tr.appendChild(userNameTd)
+						// tr.appendChild(salesNameTd)
+						// tr.appendChild(dateStrTd)
+						document.getElementById("list").append(checkboxTd);
+						document.getElementById("list").append(userNameTd);
+						document.getElementById("list").append(salesNameTd);
+						document.getElementById("list").append(dateStrTd);
+
+					}
+				}
+
+				// $.get("http://10.134.51.56:8082/cloudwalk-wechat/wechat/test", { key: key }, function (data) {
+				// 	if (data.length > 0) {
+				// 		//var td = "<td>";
+				// 		$.each(data, function (index, user) {
+				// 			$("#list").append("<td><input type='checkbox' name='id' value='" + user.id + "'/></td>");
+				// 			$("#list").append("<td name='userName'>" + user.userName + "</td>");
+				// 			$("#list").append("<td name='salesName'>" + user.salesName + "</td>");
+				// 			$("#list").append("<td name='dateStr'>" + user.dateStr + "</td>");
+				// 		})
+				// 	} else {
+				// 		//alert("未找到匹配数据");
+				// 		var str = "暂无数据";
+				// 		$("#list").append("<td colspan='4'>" + str + "</td>");
+				// 	}
+				// }, "json");
+			}
+
+		}
+
+		function conf() { // 点击确认
+			var arrayList = new Array();
+			$("input:checkbox[name='id']:checked").each(function () {
+				arrayList.push($(this).val());
+			});
+			if (arrayList.length > 0) {
+				var check = $("input:checkbox:checked")
+				check.each(function () {
+					var row = $(this).parent("td").parent("tr");
+					var id = $("[name='id']").val();
+					var userName = row.find("[name='userName']").html();
+					var salesName = row.find("[name='salesName']").html();
+					var dateStr = row.find("[name='dateStr']").html();
+					//console.info(row)
+
+					//console.info(window.opener.document.getElementById("theme").value)
+					alert(id + "-" + userName + "-" + salesName + "-" + dateStr);
+					// if(window.parent != this.window){  //判断是否存在父窗口
+					// 	alert("存在父窗口");
+					// }else{
+					// 	alert("不存在父窗口");
+					// }
+					//$("#userName", window.parent.document).attr("value", userName);
+					// console.info($(window.parent.document).find(".userName").text("123"));
+					//alert($(window.parent.document).find("#theme").text("111"))
+					//console.info($("#theme",window.parent.document).userName);
+					// console.info($("#theme",window.parent.document).attr());
+					// parent.document.getElementById("theme")
+					// console.info(document.getElementById("ooo").value);
+
+					// console.info(window.parent.document.getElementById("theme").html("0000"));
+					// console.info(parent.window.document.getElementById("theme").html("6666"));
+					// console.info(window.parent.document.getElementById("theme"))
+					// console.info($("#theme", parent.window.document).selector.parent);
+					// console.info(parent.$("#theme").val());
+					// console.info(window.parent.$("#theme").html());
+					// console.info(window.location.host);
+					// console.info(document.location.href);
+					//console.info(document.domain.val);
+					// console.info($("#theme", window.parent.document).val)
+				});
+			} else {
+				alert("请至少选择一条数据");
+			}
+		}
+
+		function canc() { // 关闭窗口
+			window.close();
+		}
+	</script>
+</head>
+
+<body>
+
+	<h2>客户信息</h2>
+	<hr>
+	客户名称&ensp;<input type="text" name="key" placeholder="请输入客户名称">&ensp;<input type="button" value="搜索"
+		onclick="search()" /><br /><br />
+	<table>
+		<tr>
+			<td>选项</td>
+			<td>客户名称</td>
+			<td>销售经理</td>
+			<td>创建时间</td>
+		</tr>
+		<tr id="list"></tr>
+	</table><br />
+	<input type="button" value="确认" onclick="conf()" />&ensp;<input type="button" value="取消" onclick="canc()" />
+
+
+</body>
+
+</html>
