@@ -12,23 +12,24 @@
 			var key = $("[name='key']").val();
 			if (key == null || key == "") {
 				alert("请输入客户名称");
+			} else {
+				$.get("http://10.134.51.56:8082/cloudwalk-wechat/wechat/test", { key: key }, function (data) {
+					if (data.length > 0) {
+						//var td = "<td>";
+						$.each(data, function (index, user) {
+							$("#list").append("<td><input type='checkbox' name='id' value='" + user.id + "'/></td>");
+							$("#list").append("<td name='userName'>" + user.userName + "</td>");
+							$("#list").append("<td name='salesName'>" + user.salesName + "</td>");
+							$("#list").append("<td name='dateStr'>" + user.dateStr + "</td>");
+						})
+					} else {
+						//alert("未找到匹配数据");
+						var str = "暂无数据";
+						$("#list").append("<td colspan='4'>" + str + "</td>");
+					}
+				}, "json");
 			}
-			jQuery.support.cors = true;// 前端跨域
-			$.get("http://10.134.51.56:8082/cloudwalk-wechat/wechat/test", { key: key }, function (data) {
-				if (data.length > 0) {
-					//var td = "<td>";
-					$.each(data, function (index, user) {
-						$("#list").append("<td><input type='checkbox' name='id' value='" + user.id + "'/></td>");
-						$("#list").append("<td name='userName'>" + user.userName + "</td>");
-						$("#list").append("<td name='salesName'>" + user.salesName + "</td>");
-						$("#list").append("<td name='dateStr'>" + user.dateStr + "</td>");
-					})
-				} else {
-					//alert("未找到匹配数据");
-					var str = "暂无数据";
-					$("#list").append("<td colspan='4'>" + str + "</td>");
-				}
-			}, "json");
+
 		}
 
 		function conf() { // 点击确认
