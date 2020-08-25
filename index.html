@@ -51,23 +51,23 @@
 						var userNameTd = document.createElement("td")
 						var salesNameTd = document.createElement("td")
 						var dateStrTd = document.createElement("td")
+
 						checkoutInput.setAttribute("type", "checkbox")
 						checkoutInput.setAttribute("name", "id")
 						checkoutInput.setAttribute("value", json[0].id)
-						checkboxTd.append(checkoutInput)
 						userNameTd.setAttribute("name", "userName")
 						salesNameTd.setAttribute("name", "salesName")
 						dateStrTd.setAttribute("name", "dateStr")
+
 						var userName = document.createTextNode(json[0].userName)
 						var salesName = document.createTextNode(json[0].salesName)
 						var dateStr = document.createTextNode(json[0].dateStr)
+
+						checkboxTd.appendChild(checkoutInput)
 						userNameTd.appendChild(userName);
 						salesNameTd.appendChild(salesName);
 						dateStrTd.appendChild(dateStr)
-						// tr.appendChild(checkoutInput)
-						// tr.appendChild(userNameTd)
-						// tr.appendChild(salesNameTd)
-						// tr.appendChild(dateStrTd)
+
 						document.getElementById("list").append(checkboxTd);
 						document.getElementById("list").append(userNameTd);
 						document.getElementById("list").append(salesNameTd);
@@ -96,49 +96,62 @@
 		}
 
 		function conf() { // 点击确认
-			var arrayList = new Array();
-			$("input:checkbox[name='id']:checked").each(function () {
-				arrayList.push($(this).val());
-			});
-			if (arrayList.length > 0) {
-				var check = $("input:checkbox:checked")
-				check.each(function () {
-					var row = $(this).parent("td").parent("tr");
-					var id = $("[name='id']").val();
-					var userName = row.find("[name='userName']").html();
-					var salesName = row.find("[name='salesName']").html();
-					var dateStr = row.find("[name='dateStr']").html();
-					//console.info(row)
-
-					//console.info(window.opener.document.getElementById("theme").value)
-					alert(id + "-" + userName + "-" + salesName + "-" + dateStr);
-					// if(window.parent != this.window){  //判断是否存在父窗口
-					// 	alert("存在父窗口");
-					// }else{
-					// 	alert("不存在父窗口");
-					// }
-					//$("#userName", window.parent.document).attr("value", userName);
-					// console.info($(window.parent.document).find(".userName").text("123"));
-					//alert($(window.parent.document).find("#theme").text("111"))
-					//console.info($("#theme",window.parent.document).userName);
-					// console.info($("#theme",window.parent.document).attr());
-					// parent.document.getElementById("theme")
-					// console.info(document.getElementById("ooo").value);
-
-					// console.info(window.parent.document.getElementById("theme").html("0000"));
-					// console.info(parent.window.document.getElementById("theme").html("6666"));
-					// console.info(window.parent.document.getElementById("theme"))
-					// console.info($("#theme", parent.window.document).selector.parent);
-					// console.info(parent.$("#theme").val());
-					// console.info(window.parent.$("#theme").html());
-					// console.info(window.location.host);
-					// console.info(document.location.href);
-					//console.info(document.domain.val);
-					// console.info($("#theme", window.parent.document).val)
-				});
-			} else {
-				alert("请至少选择一条数据");
+			// var arrayList = new Array();
+			var ids = document.getElementsByName("id");
+			var userNames = document.getElementsByName("userName");
+			var salesNames = document.getElementsByName("salesName");
+			var dateStrs = document.getElementsByName("dateStr");
+			var id = "";
+			var userName = "";
+			var salesName = "";
+			var dateStr = "";
+			for (i in ids) {
+				if (ids[i].checked) {
+					id += ids[i].value + ',';
+				}
 			}
+			if (id.length > 0) {
+				id = id.substring(0, id.length - 1);
+				console.info(id + "-" + userName + "-" + salesName + "-" + dateStr);
+			}
+			console.info(window.parent.document.getElementById("theme"))
+			// $("input:checkbox[name='id']:checked").each(function () {
+			// 	arrayList.push($(this).val());
+			// });
+			// if (arrayList.length > 0) {
+			// 	var check = $("input:checkbox:checked")
+			// 	arrayList.each(function () {
+			// 		var row = $(this).parent("td").parent("tr");
+			// 		var id = $("[name='id']").val();
+			// 		var userName = row.find("[name='userName']").html();
+			// 		var salesName = row.find("[name='salesName']").html();
+			// 		var dateStr = row.find("[name='dateStr']").html();
+			// 		//console.info(row)
+			// 		alert(id + "-" + userName + "-" + salesName + "-" + dateStr);
+
+			//console.info(window.opener.document.getElementById("theme").value)
+			//$("#userName", window.parent.document).attr("value", userName);
+			// console.info($(window.parent.document).find(".userName").text("123"));
+			//alert($(window.parent.document).find("#theme").text("111"))
+			//console.info($("#theme",window.parent.document).userName);
+			// console.info($("#theme",window.parent.document).attr());
+			// parent.document.getElementById("theme")
+			// console.info(document.getElementById("ooo").value);
+
+			// console.info(window.parent.document.getElementById("theme").html("0000"));
+			// console.info(parent.window.document.getElementById("theme").html("6666"));
+			// console.info(window.parent.document.getElementById("theme"))
+			// console.info($("#theme", parent.window.document).selector.parent);
+			// console.info(parent.$("#theme").val());
+			// console.info(window.parent.$("#theme").html());
+			// console.info(window.location.host);
+			// console.info(document.location.href);
+			//console.info(document.domain.val);
+			// console.info($("#theme", window.parent.document).val)
+			// 	});
+			// } else {
+			// 	alert("请至少选择一条数据");
+			// }
 		}
 
 		function canc() { // 关闭窗口
