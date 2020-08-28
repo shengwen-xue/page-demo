@@ -4,15 +4,15 @@
 <head>
     <title>GitHub-A页面</title>
     <script type="text/javascript">
-        var iframe = document.getElementById('iframe');
-        iframe.onload = function() {
+        window.onload = function() {
+            var ifra = document.getElementById('iframe');
             var data = {
                 name: 'aym',
                 type:'wuhan'
             };
             // 向domain2传送跨域数据
-            iframe.contentWindow.postMessage(JSON.stringify(data), 'https://xue_sheng_wen.gitee.io');
-        };
+            ifra.contentWindow.postMessage(JSON.stringify(data), 'https://xue_sheng_wen.gitee.io');
+        }
 
         // 接受domain2返回数据，这边给延迟的原因，因为同步传输时，页面不一定立马拿到数据，所以给延迟
         setTimeout(function(){
@@ -24,6 +24,7 @@
 </head>
 
 <body>
+    <h1>GitHub-A页面</h1>
     <iframe id="iframe" src="https://xue_sheng_wen.gitee.io/page-demo/index.html" style="display:none;"></iframe>
 </body>
 
