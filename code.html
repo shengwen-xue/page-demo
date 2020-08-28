@@ -2,25 +2,29 @@
 <html lang="en">
 
 <head>
-    <title>样例代码</title>
+    <title>GitHub-A页面</title>
     <script type="text/javascript">
-        // window.open('https://shengwen-xue.github.io/page-demo/index.html','','width=600,height=500')
-        // window.onload = function () {
-        //     let script = document.createElement('script')
-        //     script.src = 'https://shengwen-xue.github.io/page-demo/index.html';
-        //     document.body.appendChild(script);
+        var iframe = document.getElementById('iframe');
+        iframe.onload = function() {
+            var data = {
+                name: 'aym',
+                type:'wuhan'
+            };
+            // 向domain2传送跨域数据
+            iframe.contentWindow.postMessage(JSON.stringify(data), 'https://xue_sheng_wen.gitee.io');
+        };
 
-        //     function callback(res) {
-        //         console.log(res)
-        //     }
-        // }
-        
+        // 接受domain2返回数据，这边给延迟的原因，因为同步传输时，页面不一定立马拿到数据，所以给延迟
+        setTimeout(function(){
+            window.addEventListener('message', function(e) {
+                alert('data from domain2 sss ---> ' + e.data);
+            }, false);
+        },10)
     </script>
 </head>
 
 <body>
+    <iframe id="iframe" src="https://xue_sheng_wen.gitee.io/page-demo/index.html" style="display:none;"></iframe>
 </body>
-<input type="text" id="theme" value="你好" />
-<!-- <iframe id="inline" width="800px" height="500px" src="https://shengwen-xue.github.io/page-demo/index.html"></iframe> -->
 
 </html>
