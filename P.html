@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>码云-B页面</title>
+    
+</head>
+
+<body>
+    <div id="div" style="width: 100px;height: 100px; background-color: red;"></div>
+    <!-- <input type="text" value="页面状态：未刷新" id="inp" />  -->
+    <input type="button" value="点击" onclick="chickOn()">
+</body>
+<script type="text/javascript">
+    function chickOn() {
+        let div = document.getElementById("div")
+        var h1 = document.createElement("h1")
+        h1.append("nihao")
+        div.appendChild(h1)
+        // var inpValue = document.getElementById("inp");
+        // alert("获取的值-" + inpValue.value);
+        let ifra = document.createElement("iframe");
+        ifra.src = "";
+        ifra.width = "500px";
+        ifra.height = "700px";
+        document.body.appendChild(ifra);
+        // inpValue.value = "页面状态：已刷新"
+        // var inpValue2 = document.getElementById("inp").value;
+        // alert("重新赋值后获取的值-" + inpValue.value);
+    }
+</script>
+</html>
