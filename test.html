@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>子页面</title>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        window.onload = function () {
+            console.info(document.getElementById("div").textContent);
+            // https://shengwen-xue.github.io/page-demo/code.html
+            var src = "https://shengwen-xue.github.io/page-demo/code.html";
+            var ifra = document.createElement('iframe');
+            ifra.setAttribute("src", src);
+            document.getElementById("div").appendChild(ifra);
+            console.info(window.parent.document.getElementById("theme").value);
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <div id="div">111</div>
+</body>
+
+</html>
