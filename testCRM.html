@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>通信方式-测试CRM强制刷新</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var ifra = document.getElementById('iframe');
+            var data = {
+                name: '通信方式-测试CRM强制刷新',
+                remark: '测试给CRM发消息'
+            };
+            // 向CRM传送跨域数据
+            ifra.contentWindow.postMessage(JSON.stringify(data), 'https://k8mm3cmt3235c7ed72cede6e.cloudcc.com');
+        }
+    </script>
+</head>
+
+<body>
+    <h1>通信方式-测试CRM强制刷新</h1>
+    <iframe id="iframe" src="https://k8mm3cmt3235c7ed72cede6e.cloudcc.com/query.action?id=a072020E6506184ET5jf&m=query" style="display:none;"></iframe>
+</body>
+
+</html>
