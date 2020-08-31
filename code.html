@@ -18,6 +18,7 @@
         setTimeout(function(){
             window.addEventListener('message', function(e) {
                 alert('data from domain2 sss ---> ' + e.data);
+                window.location.reload();
             }, false);
         },10)
     </script>
