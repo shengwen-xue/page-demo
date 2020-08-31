@@ -5,18 +5,35 @@
     <title>通信方式-测试CRM强制刷新</title>
     <script type="text/javascript">
         window.onload = function () {
+            // var ifra = document.createElement("iframe")
+            // ifra.setAttribute("style", "display:none")
+            // ifra.setAttribute("src", "https://xue_sheng_wen.gitee.io/page-demo/test.html")
+            // console.info(ifra1)
+            // document.body.appendChild(ifra1)
             var ifra = document.getElementById('iframe');
             var data = {
-                name: '通信方式-测试CRM强制刷新',
-                remark: '测试给CRM发消息'
+                name: 'xueshengwen',
+                type: '上海'
             };
-            // 向CRM传送跨域数据
+            // document.body.appendChild(ifra)
+            // 向外部页面传送跨域数据
             ifra.contentWindow.postMessage(JSON.stringify(data), 'https://k8mm3cmt3235c7ed72cede6e.cloudcc.com');
         }
+
+        // 接受外部页面返回数据，这边给延迟的原因，因为同步传输时，页面不一定立马拿到数据，所以给延迟
+        // setTimeout(function () {
+        //     window.addEventListener('message', function (e) {
+        //         alert('外部页面回传的消息:' + e.data);
+        //         //window.location.reload();
+        //         //window.parent.location.reload();
+        //     }, false);
+        // }, 30);
     </script>
 </head>
+
 <body>
     <h1>通信方式-测试CRM强制刷新</h1>
     <iframe id="iframe" src="https://k8mm3cmt3235c7ed72cede6e.cloudcc.com/query.action?id=a072020E6506184ET5jf&m=query" style="display:none;"></iframe>
 </body>
+
 </html>
