@@ -7,17 +7,17 @@
         window.onload = function() {
             var ifra = document.getElementById('iframe');
             var data = {
-                name: 'aym',
-                type:'wuhan'
+                name: 'xueshengwen',
+                type:'上海'
             };
-            // 向domain2传送跨域数据
+            // 向码云传送跨域数据
             ifra.contentWindow.postMessage(JSON.stringify(data), 'https://xue_sheng_wen.gitee.io');
         }
 
-        // 接受domain2返回数据，这边给延迟的原因，因为同步传输时，页面不一定立马拿到数据，所以给延迟
+        // 接受码云返回数据，这边给延迟的原因，因为同步传输时，页面不一定立马拿到数据，所以给延迟
         setTimeout(function(){
             window.addEventListener('message', function(e) {
-                alert('data from domain2 sss ---> ' + e.data);
+                alert('码云回传的消息:' + e.data);
                 window.location.reload();
             }, false);
         },10)
